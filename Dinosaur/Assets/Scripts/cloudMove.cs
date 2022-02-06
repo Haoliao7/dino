@@ -4,26 +4,12 @@ using UnityEngine;
 
 public class cloudMove : MonoBehaviour
 {
-    public  GameManager mymanager;
-
-
-    new Vector2 newPos;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
+        
 
-        newPos = gameObject.transform.position; // store the current position into newPos 
-
-        newPos.x -= mymanager.speed * Time.deltaTime / 2; // make the x position move to left, the speed should be less cuz it's far
-
-        gameObject.transform.position = newPos; // store the changed position back to this gameobject
+        transform.position = UtilScript.Vector3Modify(transform.position, GameManager.speed/2 * Time.deltaTime, 0, 0); //change its x position(but slower than enemy)
 
 
         if (gameObject.transform.position.x < -10) // if this object move out of the screen

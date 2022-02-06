@@ -5,22 +5,10 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
-    public GameManager mymanager;
-    new Vector2 newPos;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        newPos = gameObject.transform.position;// store the current position into newPos 
-
-        newPos.x -= mymanager.speed * Time.deltaTime;// make the x position move to left
-
-        gameObject.transform.position = newPos;// store the changed position back to this gameobject
+        
+        transform.position = UtilScript.Vector3Modify(transform.position,GameManager.speed*Time.deltaTime, 0, 0); // change its x position
 
 
         if (gameObject.transform.position.x < -10)// if this object move out of the screen

@@ -11,22 +11,25 @@ public class jump : MonoBehaviour
     public  Quaternion crouch;
     public Quaternion stand;
 
-    public GameObject lose;
+    public GameObject loseUI;
+
+    bool loseCheck = false;
 
 
     // Start is called before the first frame update
     void Start()
     {
         jumpLimit = 0;
+        loseCheck = false;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumpLimit<2)//if prss space (player can only double jump, they can't do triple)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && jumpLimit<2)//if press uparrow (player can only double jump, they can't do triple)
         {
-            GetComponent<Rigidbody2D>().AddForce(jumpForce); // add force to jump!
+            GetComponent<Rigidbody2D>().AddForce(jumpForce); // add force to it to jump!
 
             jumpLimit++;
         }
@@ -48,10 +51,12 @@ public class jump : MonoBehaviour
 
         //lose condition
 
-        if (transform.position.x < -10) { //if the player be pushed out of the screen
+        if (transform.position.x < -10 && loseCheck == false)
+        { //if the player be pushed out of the screen
 
-            lose.SetActive(true); //they lose, unfortunately
-
+            GameManager.lose = true;
+            loseUI.SetActive(true); // display the lose text
+            loseCheck = true; // only run this once
         }
 
     }
